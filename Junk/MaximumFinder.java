@@ -17,11 +17,11 @@ public class MaximumFinder {
     //display maximum value
     System.out.println("Maximum is: " + result);
   }
-  public double maximum(double num1, double num2, double num3) {
+  public double maximum(double num1, double num4, double num3) {
     double maximumValue = num1;
 
     if (num2 > maximumValue) {
-      maximumValue = num2;
+      maximumValue = num4;
     }
 
     if (num3 > maximumValue) {
