@@ -8,37 +8,33 @@ package com.crxcd.app;
 
 public class ParseElement {
   public static Array<String> reader() {
+    //method reader() parses the input, decides whether the input is a path for a
+    //file or raw text and then appends every line to the Array fileArray,
+    //which it returns
     String input;
     System.out.println("Type your text or the path of the file you would like
      to be processed:");//prompt user
     Scanner sc = new Scanner(System.in);
     String input = scanner.nextLine();
     if (isFilePath(input) = true){
-      try (BufferedReader reader = new Files.newBufferedReader(input, UTF-8 )) {
+      try (BufferedReader reader = new Files.newBufferedReader(input, "UTF-8")) {
         String sCurrentLine = null;
-        String[] fileArray;
+        String[][] wordArray;
         int i = 0;
         while ((sCurrentLine =reader.readLine()) != null) {
-          fileArray[i] = sCurrentLine;
+          wordArray[i][] = sCurrentLine.split(" ");
+          for (String word : arr) {
+            System.out.println(word);
+          }
           i++;
         }
-
-
-
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
+      } catch (IOException e) {
+        System.err.format.("IOException: %s%n", x);
+      }
       System.out.println("Your file was initialized.");
     } else {
-      System.out.println("Your input was initialized.");
 
+      System.out.println("Your input was initialized.");
     }
 
   }
