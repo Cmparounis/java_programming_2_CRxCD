@@ -9,13 +9,21 @@ package com.crxcd.app;
 public class ParseElement {
   public static Array<String> reader() {
     String input;
-    System.out.println("Type your text or the path of the file you would like to be processed:");//prompt user
+    System.out.println("Type your text or the path of the file you would like
+     to be processed:");//prompt user
     Scanner sc = new Scanner(System.in);
     String input = scanner.nextLine();
     if (isFilePath(input) = true){
-      try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+      try (BufferedReader reader = new Files.newBufferedReader(input, UTF-8 )) {
+        String sCurrentLine = null;
+        String[] fileArray;
+        int i = 0;
+        while ((sCurrentLine =reader.readLine()) != null) {
+          fileArray[i] = sCurrentLine;
+          i++;
+        }
 
-			String sCurrentLine;
+
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				System.out.println(sCurrentLine);
