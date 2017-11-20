@@ -4,7 +4,8 @@ import java.util.Scanner; //Imports class Scanner
 import java.io.BufferedReader; //Imports class BufferedReader
 import java.io.FileReader; //Imports class FileReader
 import java.io.IOException; //Imports class IOException
-import java.nio.file.Files;//Imports class Files
+import java.io.File;
+import java.nio.file.Files;//Imports NIO class Files
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
@@ -18,6 +19,11 @@ public class ParseElement {
 		Scanner sc = new Scanner(System.in);
 		String input1 = sc.nextLine();
 		String[] wordArray;
+
+		do{
+			System.out.println("You must type at least one word.");
+			input1 = sc.nextLine();
+		}while (input1.isEmpty());
 
 		if (isFilePath(input1) == true){
 			Path file = Paths.get(input1);
@@ -47,6 +53,14 @@ public class ParseElement {
 
 	}
 	public static boolean isFilePath(String str) {
-		return true;
+		File f = null;
+		boolean checker = false;
+		try{
+			f = new File(str);
+			checker = f.exists();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return checker;
 	}
 }
