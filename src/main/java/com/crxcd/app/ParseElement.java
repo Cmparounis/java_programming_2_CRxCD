@@ -26,14 +26,16 @@ public class ParseElement {
 		if (isFilePath(input1)){
 			Path file = Paths.get(input1);
 			wordArray = new String[10];
-			try (BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
+			try {
+				BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
 				String sCurrentLine = null;
 				while ((sCurrentLine =reader.readLine()) != null) {
+					wordArray = sCurrentLine.split(" ");
+					for (String word : wordArray) {
+						System.out.println(word);
+					}
 				}
-				wordArray = sCurrentLine.split(" ");
-				for (String word : wordArray) {
-					System.out.println(word);
-				}
+				System.out.println(wordArray.length);
 			} catch (IOException e) {
 				System.err.format("IOException: %s%n", e);
 			}
