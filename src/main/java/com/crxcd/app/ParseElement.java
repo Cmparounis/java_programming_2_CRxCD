@@ -1,5 +1,6 @@
 //Program that reads and imports user input
 import java.util.Scanner; //Imports class Scanner
+import java.util.ArrayList;
 import java.io.BufferedReader; //Imports class BufferedReader
 import java.io.FileReader; //Imports class FileReader
 import java.io.IOException; //Imports class IOException
@@ -10,7 +11,7 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
 public class ParseElement {
-	public static String[] reader() {
+	public static ArrayList<String> reader() {
 		//method reader() parses the input, decides whether the input is a path
 		//for a file or raw text and then appends every line to the Array
 		//fileArray, which it returns
@@ -18,6 +19,7 @@ public class ParseElement {
 		Scanner sc = new Scanner(System.in);
 		String input1 = sc.nextLine();
 		String[] wordArray;
+		ArrayList<String> wordList = new ArrayList<String>();
 
 		while (input1.isEmpty()){
 			System.out.println("You must type at least one word.");
@@ -31,24 +33,30 @@ public class ParseElement {
 				String sCurrentLine = null;
 				while ((sCurrentLine =reader.readLine()) != null) {
 					wordArray = sCurrentLine.split(" ");
-					for (String word : wordArray) {
-						System.out.println(word);
+					for (int i = 0; i < wordArray.length; i++) {
+						wordList.add(wordArray[i]);
 					}
 				}
-				System.out.println(wordArray.length);
+				for (int z = 0; z < wordList.size(); z++) {
+					System.out.println(wordList.get(z));
+					}
+				System.out.println(wordList.size());
 			} catch (IOException e) {
 				System.err.format("IOException: %s%n", e);
 			}
 			System.out.println("Your file was initialized.");
-			return wordArray;
+			return wordList;
 		} else {
 			wordArray = new String[10];
 			wordArray = input1.split(" ");
-			for (String word : wordArray) {
-				System.out.println(word);
+			for (int i = 0; i < wordArray.length; i++) {
+				wordList.add(wordArray[i]);
+			}
+			for (int z = 0; z < wordList.size(); z++) {
+				System.out.println(wordList.get(z));
 			}
 			System.out.println("Your input was initialized.");
-			return wordArray;
+			return wordList;
 		}
 
 	}
