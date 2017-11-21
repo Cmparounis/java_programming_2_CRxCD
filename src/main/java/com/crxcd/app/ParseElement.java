@@ -23,9 +23,8 @@ public class ParseElement {
 		do{
 			System.out.println("You must type at least one word.");
 			input1 = sc.nextLine();
-		}while (input1.isEmpty());
-
-		if (isFilePath(input1) == true){
+		} while (input1.isEmpty());
+		if (isFilePath(input1)){
 			Path file = Paths.get(input1);
 			wordArray = new String[10];
 			try (BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
