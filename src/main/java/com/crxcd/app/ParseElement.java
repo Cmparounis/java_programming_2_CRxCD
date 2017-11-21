@@ -1,5 +1,4 @@
 //Program that reads and imports user input
-
 import java.util.Scanner; //Imports class Scanner
 import java.io.BufferedReader; //Imports class BufferedReader
 import java.io.FileReader; //Imports class FileReader
@@ -30,10 +29,10 @@ public class ParseElement {
 			try (BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
 				String sCurrentLine = null;
 				while ((sCurrentLine =reader.readLine()) != null) {
-					wordArray = sCurrentLine.split(" ");
-					for (String word : wordArray) {
-						System.out.println(word);
-					}
+				}
+				wordArray = sCurrentLine.split(" ");
+				for (String word : wordArray) {
+					System.out.println(word);
 				}
 			} catch (IOException e) {
 				System.err.format("IOException: %s%n", e);
