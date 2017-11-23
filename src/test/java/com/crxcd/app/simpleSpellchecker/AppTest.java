@@ -1,4 +1,4 @@
-package com.crxcd.app;
+package com.CRxCD.app.simpleSpellchecker;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
