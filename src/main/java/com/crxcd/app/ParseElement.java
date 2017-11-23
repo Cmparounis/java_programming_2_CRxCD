@@ -1,5 +1,4 @@
 //Program that reads and imports user input
-import java.util.Scanner; //Imports class Scanner
 import java.util.LinkedList;
 import java.io.BufferedReader; //Imports class BufferedReader
 import java.io.FileReader; //Imports class FileReader
