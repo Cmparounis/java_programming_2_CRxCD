@@ -1,6 +1,6 @@
 //Program that reads and imports user input
 import java.util.Scanner; //Imports class Scanner
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.io.BufferedReader; //Imports class BufferedReader
 import java.io.FileReader; //Imports class FileReader
 import java.io.IOException; //Imports class IOException
@@ -11,20 +11,9 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
 public class ParseElement {
-	public static ArrayList<String> reader() {
-		//method reader() parses the input, decides whether the input is a path
-		//for a file or raw text and then appends every line to the Array
-		//fileArray, which it returns
-		System.out.println("Type your text or the path of the file you would like to be processed:");//prompt user
-		Scanner sc = new Scanner(System.in);
-		String input1 = sc.nextLine();
+	public static LinkedList<String> reader(String input1) {
 		String[] wordArray;
-		ArrayList<String> wordList = new ArrayList<String>();
-
-		while (input1.isEmpty()){
-			System.out.println("You must type at least one word.");
-			input1 = sc.nextLine();
-		}
+		LinkedList<String> wordList = new LinkedList<String>();
 		if (isFilePath(input1)){
 			Path file = Paths.get(input1);
 			wordArray = new String[10];
@@ -58,7 +47,6 @@ public class ParseElement {
 			System.out.println("Your input was initialized.");
 			return wordList;
 		}
-
 	}
 	public static boolean isFilePath(String str) {
 		File f = null;
