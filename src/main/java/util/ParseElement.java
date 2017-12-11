@@ -1,6 +1,8 @@
 package util;
 
 import java.util.LinkedList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.File;
@@ -10,16 +12,19 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
 public class ParseElement {
+	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
 	public static LinkedList<String> reader(String input1) {
 		String[] wordArray;
 		LinkedList<String> wordList = new LinkedList<String>();
 		if (isFilePath(input1)){
 			Path file = Paths.get(input1);
-			wordArray = new String[10];
+			wordArray = new String[100];
 			try {
 				BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
 				String sCurrentLine = null;
 				while ((sCurrentLine =reader.readLine()) != null) {
+					Matcher unwantedMatcher = UNWANTED_SYMBOLS.matcher(sCurrentLine);
+					sCurrentLine = unwantedMatcher.replaceAll("");
 					wordArray = sCurrentLine.split(" ");
 					for (int i = 0; i < wordArray.length; i++) {
 						wordList.add(wordArray[i]);
@@ -35,7 +40,9 @@ public class ParseElement {
 			System.out.println("Your file was initialized.");
 			return wordList;
 		} else {
-			wordArray = new String[10];
+			wordArray = new String[100];
+			Matcher unwantedMatcher = UNWANTED_SYMBOLS.matcher(input1);
+			input1 = unwantedMatcher.replaceAll("");
 			wordArray = input1.split(" ");
 			for (int i = 0; i < wordArray.length; i++) {
 				wordList.add(wordArray[i]);
