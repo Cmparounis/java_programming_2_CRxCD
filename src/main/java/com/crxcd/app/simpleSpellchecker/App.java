@@ -16,7 +16,8 @@ public class App {
 		System.out.println("Greek Spellchecker by CRxCD- in development");
   		String input1 = " " ;
   		while (input1.compareToIgnoreCase("quit") != 0) {
-          	System.out.println("Type 'Quit' in order to quit or type your text or the path of the file you would like to be processed:");//prompt user
+          	System.out.println("Type your text or the path of the file you would like to be processed:");
+          	System.out.println("Type 'Quit' in order to quit.");
   			sc = new Scanner(System.in);
   			input1 = sc.nextLine();
   			while (input1.isEmpty()) {
