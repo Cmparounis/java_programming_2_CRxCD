@@ -1,26 +1,27 @@
-import static org.junit.Assert.*;
-//import org.junit.jupiter.api.Test;
+package util;
 import java.util.LinkedList;
-import java.util.HashSet;
 
 import org.junit.Test;
 
-public class TestChecker {
+import java.util.HashSet;
+import junit.framework.TestCase;
 
+public class TestChecker extends TestCase {
+	
 	@Test
 	public void test() {
 		LinkedList<String> testList = new LinkedList<String>();
 		HashSet<String> testHash = new HashSet<String>();
 		LinkedList<String> resultsList = new LinkedList<String>();
-		testList.add("αυτοκίνητο");
-		testList.add("Τραπέζι");
-		testList.add("δεκα");
-		testList.add("υπολοιστής");
-		testHash.add("αυτοκίνητο");
-		testHash.add("Τραπέζι");
-		testHash.add("δεκα");
-		testHash.add("υπολογιστής");		
-		resultsList.add("υπολοιστής");	
+		testList.add("Ξ±Ο…Ο„ΞΏΞΊΞ―Ξ½Ξ·Ο„ΞΏ");
+		testList.add("Ξ¤ΟΞ±Ο€Ξ­Ξ¶ΞΉ");
+		testList.add("Ξ΄ΞµΞΊΞ±");
+		testList.add("Ο…Ο€ΞΏΞ»ΞΏΞΉΟƒΟ„Ξ®Ο‚");
+		testHash.add("Ξ±Ο…Ο„ΞΏΞΊΞ―Ξ½Ξ·Ο„ΞΏ");
+		testHash.add("Ξ¤ΟΞ±Ο€Ξ­Ξ¶ΞΉ");
+		testHash.add("Ξ΄ΞµΞΊΞ±");
+		testHash.add("Ο…Ο€ΞΏΞ»ΞΏΞ³ΞΉΟƒΟ„Ξ®Ο‚");		
+		resultsList.add("Ο…Ο€ΞΏΞ»ΞΏΞΉΟƒΟ„Ξ®Ο‚");	
 		
 		assertEquals(resultsList, Checker.finder(testList, testHash));
 		
