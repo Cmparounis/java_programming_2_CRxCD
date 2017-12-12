@@ -18,6 +18,8 @@ public class Checker {
 		}
 		if (errors.isEmpty()) {
 			System.out.println("No errors found.");
+		} else {
+			System.out.println( errors.size() + " errors found.");
 		}
 		return errors;
 	}

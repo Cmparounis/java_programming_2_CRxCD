@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 
-public class DictionaryGenerator {
+public class DictionaryGenerator{
 
 	public static HashSet<String> readFile(String fileName) {
 		Path file = Paths.get(fileName);
@@ -28,6 +28,11 @@ public class DictionaryGenerator {
 		return dictionary;
 	}
 }
+
+
+
+
+
 
 
 
