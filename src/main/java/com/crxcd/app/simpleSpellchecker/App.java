@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class App {
 	private static Scanner sc;
-	private static final String DictionaryPath = "C:\\Documents and Settings\\t8130104\\My Documents\\Downloads\\drive-download-20171207T132530Z-001\\greek.txt";
+	private static final String DictionaryPath = " ";
 	public static void main(String[] args) {
 		System.out.println("Spellchecker by CRxCD- in development");
   		String input1 = " " ;
