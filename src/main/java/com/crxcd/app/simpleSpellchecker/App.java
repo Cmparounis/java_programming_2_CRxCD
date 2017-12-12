@@ -11,7 +11,7 @@ import util.ParseElement;
 
 public class App {
 	private static Scanner sc;
-	private static final String DictionaryPath =  new File("src/main/config/greek.txt").getAbsolutePath();
+	private static final String DictionaryPath =  new File("src/main/java/config/greek.txt").getAbsolutePath();
 	public static void main(String[] args) {
 		System.out.println("Greek Spellchecker by CRxCD- in development");
   		String input1 = " " ;
