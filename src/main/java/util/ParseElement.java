@@ -1,11 +1,13 @@
 package util;
 
 import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,10 +29,12 @@ public class ParseElement {
 		} else {
 			Path file = null;
 			try {
-				File temp = File.createTempFile("temp-input", ".tmp");
-				BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
-				writer.write(input1);
-				writer.close();
+				File temp = File.createTempFile("config/temp-input", ".txt");
+				BufferedWriter out = new BufferedWriter
+					    (new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8));
+				//BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+				out.write(input1);
+				out.close();
 				file = Paths.get(temp.getAbsolutePath());
 			} catch (IOException e) {
 				System.err.format("IOException: %s%n", e);
