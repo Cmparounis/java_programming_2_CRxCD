@@ -1,17 +1,17 @@
 package util;
 
-import java.util.LinkedList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParseElement {
 	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
@@ -67,18 +67,6 @@ public class ParseElement {
 			}
 			System.out.println("Your file was initialized.");
 			return wordList;
-			/*wordArray = new String[100];
-			Matcher unwantedMatcher = UNWANTED_SYMBOLS.matcher(input1);
-			input1 = unwantedMatcher.replaceAll("");
-			wordArray = input1.split(" ");
-			for (int i = 0; i < wordArray.length; i++) {
-				wordList.add(wordArray[i]);
-			}
-			for (int z = 0; z < wordList.size(); z++) {
-				System.out.println(wordList.get(z));
-			}
-			System.out.println("Your input was initialized.");
-			return wordList;*/
 		}
 	}
 	public static boolean isFilePath(String str) {

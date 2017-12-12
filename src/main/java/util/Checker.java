@@ -1,7 +1,7 @@
 package util;
 
-import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Checker {
 
@@ -10,10 +10,14 @@ public class Checker {
 		int i =  0;
 		for (String element : input1) {
 			i++;
-			if (dictionary.contains(element) == false) {
+			String lowercaseElement = element.toLowerCase();
+			if (!dictionary.contains(lowercaseElement) && !dictionary.contains(element)) {
 				errors.add(element);
 				System.out.format("Error found in word %d, %s%n", i, element);
 			}
+		}
+		if (errors.isEmpty()) {
+			System.out.println("No errors found.");
 		}
 		return errors;
 	}

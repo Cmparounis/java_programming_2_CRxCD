@@ -1,12 +1,13 @@
+package util;
+
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class DictionaryGenerator{
 
@@ -28,14 +29,6 @@ public class DictionaryGenerator{
 	}
 }
 
-	/*public static void main (String[] args) {
-		HashSet<String> set = readFile("C:\\Documents and Settings\\t8130104\\My Documents\\Downloads\\drive-download-20171207T132530Z-001\\greek.txt");
-		Iterator<String> it =  set.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
-	}
-}*/
 
 
 
