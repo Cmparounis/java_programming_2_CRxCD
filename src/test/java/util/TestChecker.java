@@ -6,8 +6,16 @@ import org.junit.Test;
 import java.util.HashSet;
 import junit.framework.TestCase;
 
+/**
+ * <h1> Unit Test of Checker </h1>
+ *
+ * @author Makisfnt
+ * @version 0.2-INSTANCE
+ * @since 0.2-INSTANCE
+ */
+
 public class TestChecker extends TestCase {
-	
+
 	@Test
 	public void test() {
 		LinkedList<String> testList = new LinkedList<String>();
@@ -20,11 +28,11 @@ public class TestChecker extends TestCase {
 		testHash.add("αυτοκίνητο");
 		testHash.add("Τραπέζι");
 		testHash.add("δεκα");
-		testHash.add("υπολογιστής");		
-		resultsList.add("υπολοιστής");	
-		
+		testHash.add("υπολογιστής");
+		resultsList.add("υπολοιστής");
+
 		assertEquals(resultsList, Checker.finder(testList, testHash));
-		
+
 	}
 
 }

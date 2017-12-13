@@ -9,7 +9,29 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 
+/**
+ * <h1> Initialization of Greek Dictionary </h1>
+ *
+ * <p> This class </p>
+ *
+ * @author filiamaroutsi
+ * @author katerinakontarini
+ * @version 0.2-INSTANCE
+ * @since 0.1-INSTANCE
+ */
+
 public class DictionaryGenerator{
+
+	/**
+	 * This method creates a HashSet of Greek Dictionary, read from a local txt file.
+	 *
+	 * @param fileName the path where the <i>param file</i> is located.
+	 * @exception FileNotFoundException is thrown for ivalid filename paths
+	 * @exception IOException on input error
+	 * @see FileNotFoundException
+	 * @see IOException
+	 * @return dictionary a hash set that contains all the greek words defined in the <i>param file</i>
+	 */
 
 	public static HashSet<String> readFile(String fileName) {
 		Path file = Paths.get(fileName);

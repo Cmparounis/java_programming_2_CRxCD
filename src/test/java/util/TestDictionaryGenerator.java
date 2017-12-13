@@ -8,6 +8,14 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
+/**
+ * <h1> Unit Test of DictionaryGenerator </h1>
+ *
+ * @author Makisfnt
+ * @version 0.2-INSTANCE
+ * @since 0.2-INSTANCE
+ */
+
 public class TestDictionaryGenerator {
 
 	@Test
