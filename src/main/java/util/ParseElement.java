@@ -13,6 +13,13 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+/**
+ * <h1> Parse Element </h1>
+ *
+ * @author Cmparounis
+ * @version 0.2-INSTANCE
+ * @since 0.1-INSTANCE
+ */
 
 public class ParseElement {
 	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
