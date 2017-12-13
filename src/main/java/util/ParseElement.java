@@ -1,8 +1,6 @@
 package util;
 
 import java.io.BufferedReader;
-//import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,9 +28,8 @@ public class ParseElement {
 			Path file = null;
 			try {
 				File temp = File.createTempFile("config/temp-input", ".txt");
-				BufferedWriter out = new BufferedWriter
-					    (new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8));
-				//BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+				OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8);
+
 				out.write(input1);
 				out.close();
 				file = Paths.get(temp.getAbsolutePath());

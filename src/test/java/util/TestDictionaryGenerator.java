@@ -1,9 +1,10 @@
 package util;
 
-import static org.junit.Assert.*;
-import java.util.HashSet;
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 
 import org.junit.Test;
 
@@ -22,10 +23,10 @@ public class TestDictionaryGenerator {
 			out.println("γκούτσι");
 			out.println("γκανγκ");
 			out.println("420");
-			out.close();	
-			
+			out.close();
+
 		} catch(IOException e) {
-			
+
 		}
 		HashSet<String> testDictionary = new HashSet<>();
 		testDictionary.add("Αυτό");
