@@ -1,13 +1,13 @@
 package util;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import junit.framework.TestCase;
 
 public class TestChecker extends TestCase {
-	
+
 	@Test
 	public void test() {
 		LinkedList<String> testList = new LinkedList<String>();
@@ -20,11 +20,11 @@ public class TestChecker extends TestCase {
 		testHash.add("αυτοκίνητο");
 		testHash.add("Τραπέζι");
 		testHash.add("δεκα");
-		testHash.add("υπολογιστής");		
-		resultsList.add("υπολοιστής");	
-		
+		testHash.add("υπολογιστής");
+		resultsList.add("υπολοιστής");
+
 		assertEquals(resultsList, Checker.finder(testList, testHash));
-		
+
 	}
 
 }
