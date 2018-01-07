@@ -1,9 +1,9 @@
 package util;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import junit.framework.TestCase;
 
 /**
