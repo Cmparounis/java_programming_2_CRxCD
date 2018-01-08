@@ -5,14 +5,19 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+
 import util.Checker;
 import util.DictionaryGeneratorWeb;
 import util.ParseElement;
+import util.Suggestions;
 
 public class App {
 	
 	private static final String grDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/greek.txt";
 	private static final String enDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/words_alpha.txt";
+	private static boolean isEn = false;
+	private static boolean isGr = false;
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String input1 = " " ;
 		HashSet<String> dictionary = new HashSet<String>();
@@ -31,10 +36,12 @@ public class App {
 			if (input1.compareToIgnoreCase("EN") == 0) {
 				System.out.println("Please wait...");
 				dictionary = new HashSet<String>(DictionaryGeneratorWeb.readFile(enDictionaryURL));
+				isEn = true;
 				System.out.println("CRxCD - Welcome to the english spellchecker - in development");
 			} else if (input1.compareToIgnoreCase("GR") == 0) {
 				System.out.println("Please wait...");
 				dictionary = new HashSet<String>(DictionaryGeneratorWeb.readFile(grDictionaryURL));
+				isGr = true;
 				System.out.println("CRxCD- Welcome to the greek spellchecker - in development");
 			} else {
 				System.out.println("Please enter a valid Value");
@@ -63,9 +70,36 @@ public class App {
   				try {
   					final long startTime = System.nanoTime();
   					HashMap<String, String> uInput = new HashMap<String, String>(ParseElement.reader(input1));
-  					Checker.finder(uInput, dictionary) ;
+  					HashMap<String, String> errors = Checker.finder(uInput, dictionary);
   					final long endTime = System.nanoTime();
   					System.out.println("The process took : " + ((endTime - startTime) / 1000000) + "ms to complete.");
+  					for (String key : errors.keySet()) {
+  						String element = errors.get(key);
+  						System.out.println("Error found in word "+ element +", at "+ key);
+  						if (isEn) {
+  							LinkedList<String> suggestions = Suggestions.createSuggestionsEn(element, dictionary);
+  							if (suggestions.isEmpty()) {
+  							System.out.println("No suggestions available");
+  							} else {
+  								System.out.println("Did you mean:");
+  								for (String suggestion : suggestions) {
+  	  								System.out.println(suggestion);
+  								}
+  							}
+  						}
+  						if (isGr) {
+  							LinkedList<String> suggestions = Suggestions.createSuggestionsGr(element, dictionary);
+  							if (suggestions.isEmpty()) {
+  							System.out.println("No suggestions available");
+  							} else {
+  								System.out.println("Did you mean:");
+  								for (String suggestion : suggestions) {
+  	  								System.out.println(suggestion);
+  								}
+  							}
+  						}
+  						
+  					}
   				} catch (FileNotFoundException e) {
   					System.out.println(e.getMessage());
   				}
