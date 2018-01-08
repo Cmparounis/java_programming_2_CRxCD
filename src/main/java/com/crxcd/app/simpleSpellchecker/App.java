@@ -1,22 +1,17 @@
 package com.crxcd.app.simpleSpellchecker;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Scanner;
-
 import util.Checker;
 import util.DictionaryGeneratorWeb;
 import util.ParseElement;
 
 public class App {
 	
-	private static final String grDictionaryURL = "https://raw.githubusercontent.com/Cmparounis/java_programming_2_CRxCD/master/src/main/config/greek.txt";
+	private static final String grDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/greek.txt";
 	private static final String enDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/words_alpha.txt";
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String input1 = " " ;
@@ -75,6 +70,11 @@ public class App {
   					System.out.println(e.getMessage());
   				}
   			}
+  		}
+  		try {
+  			br.close();
+  		} catch (Exception e) {
+  			System.out.println("Reader failed to close: " + e.getMessage());
   		}
     }
 }
