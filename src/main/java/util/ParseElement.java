@@ -10,14 +10,15 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParseElement {
 	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
 	private static final Pattern FILE_PATH = Pattern.compile("([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)");
-	public static LinkedList<String> reader(String input1) throws FileNotFoundException {
+	public static HashMap<String, String> reader(String input1) throws FileNotFoundException {
 		if (isFilePath(input1)){
 			if (!fileExists(input1)) {
 				throw new FileNotFoundException("Please submit a valid path.");
@@ -58,25 +59,30 @@ public class ParseElement {
 			return false;
 		}
 	}
-	public static LinkedList<String> fileParser(Path file) {
+	public static HashMap<String, String> fileParser(Path file) {
 		boolean success = true;
+		int line= 0;
+		int level= 0;
+		HashMap<String, String> wordMap = new LinkedHashMap<String, String>();
 		String[] wordArray = new String[100];
-		LinkedList<String> wordList = new LinkedList<String>();
 		try {
 			BufferedReader reader = Files.newBufferedReader(file , StandardCharsets.UTF_8);
 			String sCurrentLine = null;
 			while ((sCurrentLine =reader.readLine()) != null) {
+				line++;
+				level = 0;
 				Matcher unwantedMatcher = UNWANTED_SYMBOLS.matcher(sCurrentLine);
-				sCurrentLine = unwantedMatcher.replaceAll("");
+				sCurrentLine = unwantedMatcher.replaceAll(" ");
 				wordArray = sCurrentLine.split(" ");
 				for (int i = 0; i < wordArray.length; i++) {
-					wordList.add(wordArray[i]);
+					level++;
+					wordMap.put("Line:" + line +", Level:" + level, wordArray[i]);
 				}
 			}
-			for (int z = 0; z < wordList.size(); z++) {
-				System.out.println(wordList.get(z));
+			for (String element : wordMap.keySet()) {
+				System.out.println(element + " " + wordMap.get(element));
 				}
-			System.out.println(wordList.size());
+			System.out.println(wordMap.size());
 		} catch (IOException e) {
 			System.err.format("IOException: %s%n", e);
 			success = false;
@@ -87,6 +93,6 @@ public class ParseElement {
 				System.out.println("Your input was initialized.");
 			}
 		}
-		return wordList;
+		return wordMap;
 	}
 }

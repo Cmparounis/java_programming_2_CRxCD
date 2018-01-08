@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 
 public class DictionaryGenerator{
-
 	public static HashSet<String> readFile(String fileName) {
 		Path file = Paths.get(fileName);
 		HashSet<String> dictionary = new HashSet<>();
@@ -20,6 +19,7 @@ public class DictionaryGenerator{
 			while ((sCurrentLine =reader.readLine()) != null) {
 				dictionary.add(sCurrentLine);
 			}
+			reader.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
