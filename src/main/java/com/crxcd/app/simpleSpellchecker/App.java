@@ -8,11 +8,10 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import util.Checker;
-import util.DictionaryGenerator;
-import util.DictionaryGeneratorWeb;
 import util.ParseElement;
 import util.Suggestions;
 import util.UserDictionary;
+import mgmt.FileManagement;
 
 public class App {
 	
@@ -39,12 +38,12 @@ public class App {
 			}
 			if (input1.compareToIgnoreCase("EN") == 0) {
 				System.out.println("Please wait...");
-				dictionary = new HashSet<String>(DictionaryGeneratorWeb.readFile(enDictionaryURL));
+				dictionary = new HashSet<String>(FileManagement.readDictionaryWeb(enDictionaryURL));
 				isEn = true;
 				System.out.println("CRxCD - Welcome to the english spellchecker - in development");
 			} else if (input1.compareToIgnoreCase("GR") == 0) {
 				System.out.println("Please wait...");
-				dictionary = new HashSet<String>(DictionaryGeneratorWeb.readFile(grDictionaryURL));
+				dictionary = new HashSet<String>(FileManagement.readDictionaryWeb(grDictionaryURL));
 				isGr = true;
 				System.out.println("CRxCD- Welcome to the greek spellchecker - in development");
 			} else {
@@ -53,11 +52,11 @@ public class App {
 		}
 		
 		if (UserDictionary.exists()) {
-			uDictionary = new HashSet<String>(DictionaryGenerator.readFile(UserDictionary.getThisPath()));
+			uDictionary = new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
 			dictionary.addAll(uDictionary);
 		} else {
 			UserDictionary.create();
-			uDictionary = new HashSet<String>(DictionaryGenerator.readFile(UserDictionary.getThisPath()));
+			uDictionary = new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
 			dictionary.addAll(uDictionary);
 		}
 		

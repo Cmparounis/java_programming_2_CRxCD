@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Suggestions {
 	final static char[] alphabetEn = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-	final static char[] alphabetGr = "בגדהוזחטיךכלםמןנסףפץצקרשÜÝÞ‗ü‎‏תûאÀ".toCharArray();
+	final static char[] alphabetGr = "בגדהוזחטיךכלםמןנסףעפץצקרשÜÝÞ‗ü‎‏תûאÀ".toCharArray();
 	
 	public static LinkedList<String> createSuggestionsEn(String word, HashSet<String> dictionary){
 		LinkedList<String> suggestions = new LinkedList<String>();
