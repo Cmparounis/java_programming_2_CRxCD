@@ -1,4 +1,5 @@
 package com.crxcd.app.simpleSpellchecker;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -7,11 +8,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import mgmt.FileManagement;
 import util.Checker;
 import util.ParseElement;
 import util.Suggestions;
 import util.UserDictionary;
-import mgmt.FileManagement;
 
 public class App {
 	
@@ -19,10 +20,11 @@ public class App {
 	private static final String enDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/words_alpha.txt";
 	private static boolean isEn = false;
 	private static boolean isGr = false;
+	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String input1 = " " ;
 		HashSet<String> dictionary = new HashSet<String>();
-		HashSet<String> uDictionary = new HashSet<String>();
+		HashSet<String> userDictionary = new HashSet<String>();
 		
 		System.out.println("Simple Spellchecker by CRxCD - in development");
 	
@@ -30,7 +32,8 @@ public class App {
 		
 		System.out.println("Please choose your language (EN for English, GR for greek)");
 		
-		while (input1.compareToIgnoreCase("EN") != 0 && input1.compareToIgnoreCase("GR") != 0 ) {
+		while (input1.compareToIgnoreCase("EN") != 0
+				&& input1.compareToIgnoreCase("GR") != 0) {
 			try {
 				input1 = br.readLine();
 			} catch (Exception e) {
@@ -38,26 +41,32 @@ public class App {
 			}
 			if (input1.compareToIgnoreCase("EN") == 0) {
 				System.out.println("Please wait...");
-				dictionary = new HashSet<String>(FileManagement.readDictionaryWeb(enDictionaryURL));
+				dictionary = 
+						new HashSet<String>(FileManagement.readDictionaryWeb(enDictionaryURL));
 				isEn = true;
-				System.out.println("CRxCD - Welcome to the english spellchecker - in development");
+				System.out.println("CRxCD - Welcome to the english"
+						+ " spellchecker - in development");
 			} else if (input1.compareToIgnoreCase("GR") == 0) {
 				System.out.println("Please wait...");
-				dictionary = new HashSet<String>(FileManagement.readDictionaryWeb(grDictionaryURL));
+				dictionary = 
+						new HashSet<String>(FileManagement.readDictionaryWeb(grDictionaryURL));
 				isGr = true;
-				System.out.println("CRxCD- Welcome to the greek spellchecker - in development");
+				System.out.println("CRxCD- Welcome to the greek"
+						+ " spellchecker - in development");
 			} else {
 				System.out.println("Please enter a valid Value");
 			}
 		}
 		
 		if (UserDictionary.exists()) {
-			uDictionary = new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
-			dictionary.addAll(uDictionary);
+			userDictionary = 
+					new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
+			dictionary.addAll(userDictionary);
 		} else {
 			UserDictionary.create();
-			uDictionary = new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
-			dictionary.addAll(uDictionary);
+			userDictionary =
+					new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
+			dictionary.addAll(userDictionary);
 		}
 		
 		
@@ -66,7 +75,6 @@ public class App {
           	System.out.println("Type 'Quit' in order to quit.");
           	try {
           		input1 = br.readLine();
-          		System.out.println(input1);
           	} catch (Exception e ) {
           		System.out.println(e.getMessage());
           	}
@@ -74,7 +82,6 @@ public class App {
   				System.out.println("You must type at least one word.");
   				try {
   	          		input1 = br.readLine();
-  	          		System.out.println(input1);
   	          	} catch (Exception e ) {
   	          		System.out.println(e.getMessage());
   	          	}

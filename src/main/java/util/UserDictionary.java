@@ -17,7 +17,8 @@ public class UserDictionary {
 	private static File file = new File(userDictionaryPath);
 	
 	public static void write(String word) {
-		try (BufferedWriter bwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), StandardCharsets.UTF_8));
+		try (BufferedWriter bwriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true),
+			StandardCharsets.UTF_8));
 				PrintWriter out = new PrintWriter(bwriter)) {
 			    out.println(word);
 			} catch (IOException e) {

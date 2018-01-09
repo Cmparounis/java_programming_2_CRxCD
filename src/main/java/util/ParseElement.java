@@ -10,12 +10,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-
 import mgmt.FileManagement;
 
 public class ParseElement {
+	
 	public static HashMap<String, String> reader(String input1) throws FileNotFoundException {
-		if (FileManagement.isFilePath(input1)){
+		if (FileManagement.isFilePath(input1)) {
 			if (!FileManagement.fileExists(input1)) {
 				throw new FileNotFoundException("Please submit a valid path.");
 			}
@@ -25,13 +25,14 @@ public class ParseElement {
 			Path file = null;
 			try {
 				File temp = File.createTempFile("config/temp-input", ".txt");
-				OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8);
+				OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(temp), 
+						StandardCharsets.UTF_8);
 
 				out.write(input1);
 				out.close();
 				file = Paths.get(temp.getAbsolutePath());
 			} catch (IOException e) {
-				System.err.format("IOException: %s%n", e);
+				System.out.println("IOException: " + e.getMessage());
 			}
 			return FileManagement.fileParser(file);
 		}

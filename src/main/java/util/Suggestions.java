@@ -4,10 +4,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Suggestions {
-	final static char[] alphabetEn = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-	final static char[] alphabetGr = "áâãäåæçèéêëìíîïğñóòôõö÷øùÜİŞßüışúûàÀ".toCharArray();
+	private static char[] alphabetEn = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+	private static char[] alphabetGr = "áâãäåæçèéêëìíîïğñóòôõö÷øùÜİŞßüışúûàÀ".toCharArray();
 	
-	public static LinkedList<String> createSuggestionsEn(String word, HashSet<String> dictionary){
+	public static LinkedList<String> createSuggestionsEn(String word, 
+			HashSet<String> dictionary) {
 		LinkedList<String> suggestions = new LinkedList<String>();
 		suggestions.addAll(addedLetterEn(word, dictionary));
 		suggestions.addAll(replaceLetterEn(word, dictionary));
@@ -16,7 +17,8 @@ public class Suggestions {
 		return suggestions;
 	}
 	
-	public static LinkedList<String> createSuggestionsGr(String word, HashSet<String> dictionary){
+	public static LinkedList<String> createSuggestionsGr(String word, 
+			HashSet<String> dictionary) {
 		LinkedList<String> suggestions = new LinkedList<String>();
 		suggestions.addAll(addedLetterGr(word, dictionary));
 		suggestions.addAll(replaceLetterGr(word, dictionary));
@@ -59,16 +61,16 @@ public class Suggestions {
         LinkedList<String> suggest = new LinkedList<>();
         int length = input.length();
         String firstremove = input.substring(1, length);
-        String lastremove = input.substring(0, length-1);
-        if( dictionary.contains(firstremove)){
+        String lastremove = input.substring(0, length - 1);
+        if (dictionary.contains(firstremove)) {
     	   suggest.add(firstremove);
         }
-        if( dictionary.contains(lastremove)){
+        if (dictionary.contains(lastremove)) {
      	   suggest.add(lastremove);
         }
         for (int i = 1; i < length; i++) {
-        	String charRemove = input.substring(0, i).concat(input.substring(i+1, length));
-        	if( dictionary.contains(charRemove)){
+        	String charRemove = input.substring(0, i).concat(input.substring(i + 1, length));
+        	if (dictionary.contains(charRemove)) {
           	   suggest.add(charRemove);
              }
         }	

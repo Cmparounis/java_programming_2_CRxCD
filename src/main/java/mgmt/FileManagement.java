@@ -18,16 +18,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileManagement {
-	private static final String UTF8_BOM = "\uFEFF";
-	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("[!@#$%^&*()-=_+|;':\",.<>?'“”’‘—]");
-	private static final Pattern FILE_PATH = Pattern.compile("([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)");
+	private static String UTF8_BOM = "\uFEFF";
+	private static Pattern UNWANTED_SYMBOLS = 
+			Pattern.compile("[!@#$%^&*()-=_+|;':\",.<>?'“”’‘—]");
+	private static Pattern FILE_PATH = 
+			Pattern.compile("([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)");
+	
 	public static boolean fileExists(String str) {
 		File f = null;
 		boolean checker = false;
-		try{
+		try {
 			f = new File(str);
 			checker = f.exists();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return checker;
@@ -41,18 +44,20 @@ public class FileManagement {
 			return false;
 		}
 	}
-	public static boolean hassBOM (String str) {
+	
+	public static boolean hasBom(String str) {
 		return str.startsWith(UTF8_BOM);
 	}
 	
 	public static HashMap<String, String> fileParser(Path file) {
 		boolean success = true;
-		int line= 0;
-		int level= 0;
+		int line = 0;
+		int level = 0;
 		HashMap<String, String> wordMap = new LinkedHashMap<String, String>();
 		String[] wordArray = new String[100];
 		try {
-			BufferedReader reader = Files.newBufferedReader(file , StandardCharsets.UTF_8);
+			BufferedReader reader = Files.newBufferedReader(file , 
+					StandardCharsets.UTF_8);
 			String sCurrentLine = null;
 			while ((sCurrentLine =reader.readLine()) != null) {
 				line++;
@@ -63,19 +68,17 @@ public class FileManagement {
 				for (int i = 0; i < wordArray.length; i++) {
 					level++;
 					String word = wordArray[i];
-					if (line == 1 && hassBOM(word)) {
+					if (line == 1 && hasBom(word)) {
 						wordMap.put("Line:" + line +", Level:" + level, word.substring(1));
 					} else {
 						wordMap.put("Line:" + line +", Level:" + level, word);
 					}
 				}
 			}
-			for (String element : wordMap.keySet()) {
-				System.out.println(element + " " + wordMap.get(element));
-				}
-			System.out.println(wordMap.size());
+			
+			System.out.println(wordMap.size() + "words");
 		} catch (IOException e) {
-			System.err.format("IOException: %s%n", e);
+			System.out.println("IOException: " + e.getMessage());
 			success = false;
 		} finally {
 			if (!success) {
@@ -92,9 +95,9 @@ public class FileManagement {
 		HashSet<String> dictionary = new HashSet<>();
 		try {
 			BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-			String sCurrentLine = null;
-			while ((sCurrentLine =reader.readLine()) != null) {
-				dictionary.add(sCurrentLine);
+			String currentLine = null;
+			while ((currentLine =reader.readLine()) != null) {
+				dictionary.add(currentLine);
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
