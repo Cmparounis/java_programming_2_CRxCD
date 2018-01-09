@@ -8,9 +8,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import util.Checker;
+import util.DictionaryGenerator;
 import util.DictionaryGeneratorWeb;
 import util.ParseElement;
 import util.Suggestions;
+import util.UserDictionary;
 
 public class App {
 	
@@ -21,13 +23,15 @@ public class App {
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String input1 = " " ;
 		HashSet<String> dictionary = new HashSet<String>();
-		System.out.println("Simple Spellchecker by CRxCD - in development");
+		HashSet<String> uDictionary = new HashSet<String>();
 		
+		System.out.println("Simple Spellchecker by CRxCD - in development");
+	
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("Please choose your language (EN for English, GR for greek)");
-		while (input1.compareToIgnoreCase("EN") != 0 && input1.compareToIgnoreCase("GR") != 0 )
-		{
+		
+		while (input1.compareToIgnoreCase("EN") != 0 && input1.compareToIgnoreCase("GR") != 0 ) {
 			try {
 				input1 = br.readLine();
 			} catch (Exception e) {
@@ -47,6 +51,16 @@ public class App {
 				System.out.println("Please enter a valid Value");
 			}
 		}
+		
+		if (UserDictionary.exists()) {
+			uDictionary = new HashSet<String>(DictionaryGenerator.readFile(UserDictionary.getThisPath()));
+			dictionary.addAll(uDictionary);
+		} else {
+			UserDictionary.create();
+			uDictionary = new HashSet<String>(DictionaryGenerator.readFile(UserDictionary.getThisPath()));
+			dictionary.addAll(uDictionary);
+		}
+		
 		
   		while (input1.compareToIgnoreCase("quit") != 0) {
           	System.out.println("Type your text or the path of the file you would like to be processed:");
@@ -69,10 +83,13 @@ public class App {
   			if (input1.compareToIgnoreCase("quit") != 0) {
   				try {
   					final long startTime = System.nanoTime();
+  					
   					HashMap<String, String> uInput = new HashMap<String, String>(ParseElement.reader(input1));
   					HashMap<String, String> errors = Checker.finder(uInput, dictionary);
+  					
   					final long endTime = System.nanoTime();
   					System.out.println("The process took : " + ((endTime - startTime) / 1000000) + "ms to complete.");
+  					
   					for (String key : errors.keySet()) {
   						String element = errors.get(key);
   						System.out.println("Error found in word "+ element +", at "+ key);
@@ -98,7 +115,24 @@ public class App {
   								}
   							}
   						}
-  						
+  						input1 = " ";
+	  					System.out.println("Would you want to enter this word in your personal dictionary? (Y/N)");
+	  					while (input1.compareToIgnoreCase("Y") != 0 && input1.compareToIgnoreCase("N") != 0) {
+	
+	  						try {
+	  							input1 = br.readLine();
+	  						} catch (Exception e) {
+	  							System.out.println(e.getMessage());
+	  						}
+	  						if (input1.compareToIgnoreCase("Y") == 0) {
+	  							UserDictionary.write(element);
+	  						} else if (input1.compareToIgnoreCase("N") == 0) {
+	  							
+	  						} else {
+	  							System.out.println("Please enter a valid Value");
+	  						}
+	  						
+	  					}
   					}
   				} catch (FileNotFoundException e) {
   					System.out.println(e.getMessage());

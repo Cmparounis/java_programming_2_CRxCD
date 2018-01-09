@@ -12,7 +12,6 @@ public class Checker {
 			String lowercaseElement = element.toLowerCase();
 			if (!dictionary.contains(lowercaseElement) && !dictionary.contains(element) && !element.matches("^[0-9]+$")) {
 				errors.put(key, element);
-				/*System.out.println("Error found in word "+ element +", at "+ key);*/
 			}
 		}
 		if (errors.isEmpty()) {

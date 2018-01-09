@@ -16,6 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParseElement {
+	private static final String UTF8_BOM = "\uFEFF";
 	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
 	private static final Pattern FILE_PATH = Pattern.compile("([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)");
 	public static HashMap<String, String> reader(String input1) throws FileNotFoundException {
@@ -51,6 +52,7 @@ public class ParseElement {
 		}
 		return checker;
 	}
+	
 	public static boolean isFilePath(String str) {
 		Matcher pathMatcher = FILE_PATH.matcher(str);
 		if (pathMatcher.matches()) {
@@ -59,6 +61,10 @@ public class ParseElement {
 			return false;
 		}
 	}
+	public static boolean isBOM (String str) {
+		return str.equalsIgnoreCase(UTF8_BOM);
+	}
+	
 	public static HashMap<String, String> fileParser(Path file) {
 		boolean success = true;
 		int line= 0;
@@ -76,7 +82,10 @@ public class ParseElement {
 				wordArray = sCurrentLine.split(" ");
 				for (int i = 0; i < wordArray.length; i++) {
 					level++;
-					wordMap.put("Line:" + line +", Level:" + level, wordArray[i]);
+					String word = wordArray[i];
+					if (line != 1 && !isBOM(word)) {
+						wordMap.put("Line:" + line +", Level:" + level, word);
+					}
 				}
 			}
 			for (String element : wordMap.keySet()) {
