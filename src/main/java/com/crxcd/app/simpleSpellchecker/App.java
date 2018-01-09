@@ -57,18 +57,12 @@ public class App {
 				System.out.println("Please enter a valid Value");
 			}
 		}
-		
-		if (UserDictionary.exists()) {
-			userDictionary = 
-					new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
-			dictionary.addAll(userDictionary);
-		} else {
+		if (!UserDictionary.exists()) {
 			UserDictionary.create();
-			userDictionary =
-					new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
-			dictionary.addAll(userDictionary);
 		}
-		
+		userDictionary = 
+				new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
+		dictionary.addAll(userDictionary);
 		
   		while (input1.compareToIgnoreCase("quit") != 0) {
           	System.out.println("Type your text or the path of the file you would like to be processed:");
@@ -131,7 +125,10 @@ public class App {
 	  							System.out.println(e.getMessage());
 	  						}
 	  						if (input1.compareToIgnoreCase("Y") == 0) {
-	  							UserDictionary.write(element);
+	  							UserDictionary.write(element.toLowerCase());
+	  							userDictionary = 
+	  									new HashSet<String>(FileManagement.readDictionary(UserDictionary.getThisPath()));
+	  							dictionary.addAll(userDictionary);
 	  						} else if (input1.compareToIgnoreCase("N") == 0) {
 	  							
 	  						} else {

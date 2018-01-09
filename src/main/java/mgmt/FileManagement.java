@@ -75,8 +75,11 @@ public class FileManagement {
 					}
 				}
 			}
-			
-			System.out.println(wordMap.size() + "words");
+			if(wordMap.size() == 1) {
+				System.out.println(wordMap.size() + " word.");
+			} else {
+				System.out.println(wordMap.size() + " words.");
+			}
 		} catch (IOException e) {
 			System.out.println("IOException: " + e.getMessage());
 			success = false;
