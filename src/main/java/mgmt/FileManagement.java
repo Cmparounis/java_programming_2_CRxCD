@@ -11,9 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,20 +86,20 @@ public class FileManagement {
 	}
 	
 	/**
-	 * Breaks down a text file into lower case words with no punctuation and stores them in a HashMap.
+	 * Breaks down a text file into lower case words with no punctuation and stores them in a LinkedHashMap.
 	 * 
 	 * <p>This method is used to read with a BufferedReader from - temporary or not - files that contain 
-	 * the user's input. The test is broken into words; these are procedurally stored in a HashMap with 
+	 * the user's input. The test is broken into words; these are procedurally stored in a LinkedHashMap with 
 	 * a String "Line: x Level: x" as their key. The method also prints a message to inform the user 
 	 * whether his file was processed or not. For, now, the program supports only UTF-8 encoding 
 	 * @param file A UTF-8 text file.
-	 * @return A HashMap containing a string of the position of each word as its keys and the words themselves as values.
+	 * @return A LinkedHashMap containing a string of the position of each word as its keys and the words themselves as values.
 	 */
-	public static HashMap<String, String> fileParser(Path file) {
+	public static LinkedHashMap<String, String> fileParser(Path file) {
 		boolean success = true;
 		int line = 0;
 		int level = 0;
-		HashMap<String, String> wordMap = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> wordMap = new LinkedHashMap<String, String>();
 		String[] wordArray = new String[100];
 		try {
 			BufferedReader reader = Files.newBufferedReader(file , 

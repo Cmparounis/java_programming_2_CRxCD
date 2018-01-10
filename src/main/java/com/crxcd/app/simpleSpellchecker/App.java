@@ -3,7 +3,7 @@ package com.crxcd.app.simpleSpellchecker;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -69,7 +69,7 @@ public class App {
 	 * <p>If he chooses not to, he is prompted to enter his text again; if not, the word is 
 	 * written to the dictionary file the dictionary collection is reinitialized
 	 * 
-	 * @param args
+	 * @param args Array args, per the java conventions.
 	 */
 	public static void main(String[] args) {
 		String input1 = " " ;
@@ -134,8 +134,8 @@ public class App {
   				try {
   					final long startTime = System.nanoTime();
   					
-  					HashMap<String, String> uInput = new HashMap<String, String>(ParseElement.reader(input1));
-  					HashMap<String, String> errors = Checker.finder(uInput, dictionary);
+  					LinkedHashMap<String, String> uInput = new LinkedHashMap<String, String>(ParseElement.reader(input1));
+  					LinkedHashMap<String, String> errors = Checker.finder(uInput, dictionary);
   					
   					final long endTime = System.nanoTime();
   					System.out.println("The process took : " + ((endTime - startTime) / 1000000) + "ms to complete.");

@@ -4,7 +4,7 @@
 
   <groupId>com.CRxCD.app</groupId>
   <artifactId>simpleSpellchecker</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <name>simpleSpellchecker</name>

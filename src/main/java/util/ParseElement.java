@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import mgmt.FileManagement;
 
@@ -27,18 +27,18 @@ public class ParseElement {
 	 * If it is a valid path or a sentence, breaks it up into words with the method 
 	 * @link {mgmt.FileManagement#fileParser(Path) fileParser}.
 	 * 
-	 * <p>If the string is a valid file path, the file is broken into a HashMap of individual words and 
+	 * <p>If the string is a valid file path, the file is broken into a LinkedHashMap of individual words and 
 	 * their index. If the string is a sentence, that input is written temporarily in a temporary file 
 	 * and then split into words.
-	 * <p>If the input is an invalid file path, a 
-	 * @link {java.io.FileNotFoundException#FileNotFoundException(String) FileNotFoundException} is thrown, 
+	 * <p>If the input is an invalid file path, a @link {java.io.FileNotFoundException#FileNotFoundException(String) 
+	 * FileNotFoundException} is thrown, 
 	 * and the user is prompted to submit a valid path again.
 	 * 
 	 * @param input1 User input. Can be a file path or a sentence.
-	 * @return A HashMap containing a String of the position of each word as its keys and the words themselves as values.
+	 * @return A LinkedHashMap containing a String of the position of each word as its keys and the words themselves as values.
 	 * @throws FileNotFoundException Exception thrown in case the file is not found.
 	 */
-	public static HashMap<String, String> reader(String input1) throws FileNotFoundException {
+	public static LinkedHashMap<String, String> reader(String input1) throws FileNotFoundException {
 		if (FileManagement.isFilePath(input1)) {
 			if (!FileManagement.fileExists(input1)) {
 				throw new FileNotFoundException("Please submit a valid path.");
