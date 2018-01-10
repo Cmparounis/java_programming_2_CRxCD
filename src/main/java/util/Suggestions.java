@@ -65,7 +65,7 @@ public class Suggestions {
 	/**
 	 * Creates all distance-1 suggestions for a String in the Greek language.
 	 * 
-	 * <p> Adds in a common collection all collections produced by @link {Suggestions#addedLetterGr(String, HashSet<String>) 
+	 * <p> Adds in a common collection all collections produced by @link {Suggestions#addedLetterGr(String, HashSet) 
 	 * addedLetterGr}, @link {util.Suggestions#removedLetter(String, HashSet)
 	 * removedLetter}, @link {Suggestions#replaceLetterGr(String, HashSet) 
 	 * replaceLetterGr}, @link {util.Suggestions#swapLetter(String, HashSet) swapLetter}.

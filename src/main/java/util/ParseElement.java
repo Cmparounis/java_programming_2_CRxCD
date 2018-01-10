@@ -24,8 +24,8 @@ import mgmt.FileManagement;
 public class ParseElement {
 	/**
 	 * Checks if a String is a file path, whether the specifies file exists, or a sentence.
-	 * If it is a valid path or a sentence, breaks it up into words with the method 
-	 * @link {mgmt.FileManagement#fileParser(Path) fileParser}.
+	 * If it is a valid path or a sentence, breaks it up into words with the method @link {
+	 * mgmt.FileManagement#fileParser(Path) fileParser}.
 	 * 
 	 * <p>If the string is a valid file path, the file is broken into a LinkedHashMap of individual words and 
 	 * their index. If the string is a sentence, that input is written temporarily in a temporary file 
