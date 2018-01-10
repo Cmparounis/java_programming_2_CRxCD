@@ -76,7 +76,7 @@ public class App {
 		HashSet<String> dictionary = new HashSet<String>();
 		HashSet<String> userDictionary = new HashSet<String>();
 		
-		System.out.println("Simple Spellchecker by CRxCD - in development");
+		System.out.println("Simple Spellchecker by CRxCD");
 	
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -95,14 +95,14 @@ public class App {
 						new HashSet<String>(FileManagement.readDictionaryWeb(enDictionaryURL));
 				isEn = true;
 				System.out.println("CRxCD - Welcome to the english"
-						+ " spellchecker - in development");
+						+ " spellchecker");
 			} else if (input1.compareToIgnoreCase("GR") == 0) {
 				System.out.println("Please wait...");
 				dictionary = 
 						new HashSet<String>(FileManagement.readDictionaryWeb(grDictionaryURL));
 				isGr = true;
 				System.out.println("CRxCD- Welcome to the greek"
-						+ " spellchecker - in development");
+						+ " spellchecker");
 			} else {
 				System.out.println("Please enter a valid Value");
 			}
