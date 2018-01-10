@@ -3,7 +3,6 @@ package com.crxcd.app.simpleSpellchecker;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -14,14 +13,65 @@ import util.ParseElement;
 import util.Suggestions;
 import util.UserDictionary;
 
+/**
+ * Runs the program and interfaces with the user.
+ * 
+ * @author Cmparounis, 
+ * @author filiamaroutsi
+ * @author SpaGeorgios
+ * @author katerinakontarini
+ * @author manosalexiou95
+ * @author SpaGeorgios
+ * @author dionisispap98
+ * @version 0.3-SNAPSHOT
+ * @since 0.1
+ * 
+ */
 public class App {
-	
+	/**
+	 * Stores the online location of the Greek Dictionary.
+	 */
 	private static final String grDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/greek.txt";
+	/**
+	 * Stores the online location of the English Dictionary.
+	 */
 	private static final String enDictionaryURL = "http://ism.dmst.aueb.gr/ismgroup42/web/words_alpha.txt";
+	/**
+	 * Stores a language check; true if English words are being spell-checked.
+	 */
 	private static boolean isEn = false;
+	/**
+	 * Stores a language check; true if Greek words are being spell-checked.
+	 */
 	private static boolean isGr = false;
 	
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	/**
+	 * This method executes a number of tasks in order to execute the spell-checking program:
+	 * 
+	 * <p> First, the method prompts the user to decide what language he would like to use. 
+	 * If the user fails to enter one of the specified values, the method prompts him to enter 
+	 * a value again.
+	 * 
+	 * <p>It then loads the respective language dictionaries from their online sources
+	 * 
+	 * <p>In addition, it initializes the user dictionary: if it doesn't exist, it creates it 
+	 * and then appends it to the existing dictionary.
+	 * 
+	 * <p>It prompts the user to enter his input; It is then spell-checked. If the user types
+	 * quit, the program ends.
+	 * 
+	 * <p>If there are no mistakes, the user is prompted to once again type his input.
+	 * 
+	 * <p>If there are, each mistake is presented to the user; he is presented with correction
+	 * suggestions; he is prompted to choose whether the perceived as erroneous word will be 
+	 * added to his personal dictionary;
+	 * 
+	 * <p>If he chooses not to, he is prompted to enter his text again; if not, the word is 
+	 * written to the dictionary file the dictionary collection is reinitialized
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
 		String input1 = " " ;
 		HashSet<String> dictionary = new HashSet<String>();
 		HashSet<String> userDictionary = new HashSet<String>();

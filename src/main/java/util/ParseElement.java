@@ -12,8 +12,32 @@ import java.util.HashMap;
 
 import mgmt.FileManagement;
 
+/**
+ * Reads user input, determines if it represents a file path or an sentence and
+ * then breaks into words using the @link {mgmt.FileManagement#fileParser(Path) fileParser}.
+ * 
+ * @author Cmparounis
+ * @author manosalexiou95
+ * @version 0.3-SNAPSHOT
+ * @since 0.1
+ */
 public class ParseElement {
-	
+	/**
+	 * Checks if a String is a file path, whether the specifies file exists, or a sentence.
+	 * If it is a valid path or a sentence, breaks it up into words with the method 
+	 * @link {mgmt.FileManagement#fileParser(Path) fileParser}.
+	 * 
+	 * <p>If the string is a valid file path, the file is broken into a HashMap of individual words and 
+	 * their index. If the string is a sentence, that input is written temporarily in a temporary file 
+	 * and then split into words.
+	 * <p>If the input is an invalid file path, a 
+	 * @link {java.io.FileNotFoundException#FileNotFoundException(String) FileNotFoundException} is thrown, 
+	 * and the user is prompted to submit a valid path again.
+	 * 
+	 * @param input1 User input. Can be a file path or a sentence.
+	 * @return A HashMap containing a String of the position of each word as its keys and the words themselves as values.
+	 * @throws FileNotFoundException Exception thrown in case the file is not found.
+	 */
 	public static HashMap<String, String> reader(String input1) throws FileNotFoundException {
 		if (FileManagement.isFilePath(input1)) {
 			if (!FileManagement.fileExists(input1)) {
