@@ -1,44 +1,38 @@
 package util;
 
+import java.util.LinkedHashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-
 /**
- * <h1> Check the text</h1>
- * <p> this class checks if a word in the text is inside the dictionary </p>
+ * Checks a collection of words for errors from a dictionary -  a collection of most of the words of the respective language.
  *
  * @author SpaGeorgios
  * @author dionisispap98
- * @version 0.2-INSTANCE
- * @since 0.1-INSTANCE
+ * @version 0.3-SNAPSHOT
+ * @since 0.1
  */
-
 public class Checker {
-
 	/**
-	 * <p> This method processes the user input, contained in a LinkedList, and then sellchecks it with a greek dictionary, contained in a HashSet.</p>
-	 * <p> It then returns a LinkedList with all the errors.
+	 * Checks if the String is contained within a language's or user's dictionary, for every string of the user input.
 	 *
-	 * @param input1 the parameter passed by <i>ParseElement.reader()</i>.
-	 * @param dictionary the parameter passed by <i>DictionaryGenerator.readFile()</i>
-	 * @return errors LinkedList containing errors
+	 * @param input1 A LinkedHashMap containing a string of the position of each word as its keys and the words to be checked themselves as values.
+	 * @param dictionary A HashSet which contains every word from the dictionary.
+	 * @return A LinkedHashMap containing a string of the position of each wrong word as its keys and the words themselves as values.
 	 */
-
-	public static LinkedList<String> finder(LinkedList<String> input1, HashSet<String> dictionary) {
-		LinkedList<String> errors = new LinkedList<String>();
-		int i =  0;
-		for (String element : input1) {
-			i++;
+	public static LinkedHashMap<String, String> finder(LinkedHashMap<String, String> input1,
+			HashSet<String> dictionary) {
+		LinkedHashMap<String, String> errors = new LinkedHashMap<String, String>();
+		for (String key : input1.keySet()) {
+			String element = input1.get(key);
 			String lowercaseElement = element.toLowerCase();
-			if (!dictionary.contains(lowercaseElement) && !dictionary.contains(element)) {
-				errors.add(element);
-				System.out.format("Error found in word %d, %s%n", i, element);
+			if (!dictionary.contains(lowercaseElement) && !dictionary.contains(element) &&
+					!element.matches("^[0-9]+$")) {
+				errors.put(key, element);
 			}
 		}
 		if (errors.isEmpty()) {
 			System.out.println("No errors found.");
 		} else {
-			System.out.println( errors.size() + " errors found.");
+			System.out.println(errors.size() + " errors found.");
 		}
 		return errors;
 	}

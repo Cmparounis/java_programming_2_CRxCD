@@ -1,99 +1,64 @@
 package util;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.LinkedHashMap;
+
+import mgmt.FileManagement;
+
 /**
- * <h1> Parse Element </h1>
+ * Reads user input, determines if it represents a file path or an sentence and
+ * then breaks into words using the @link {mgmt.FileManagement#fileParser(Path) fileParser}.
  *
  * @author Cmparounis
- * @version 0.2-INSTANCE
- * @since 0.1-INSTANCE
+ * @author manosalexiou95
+ * @version 0.3-SNAPSHOT
+ * @since 0.1
  */
-
 public class ParseElement {
-	private static final Pattern UNWANTED_SYMBOLS = Pattern.compile("\\p{Punct}");
-	private static final Pattern FILE_PATH = Pattern.compile("([A-Z|a-z]:\\\\[^*|\"<>?\\n]*)|(\\\\\\\\.*?\\\\.*)");
-	public static LinkedList<String> reader(String input1) throws FileNotFoundException {
-		if (isFilePath(input1)){
-			if (!fileExists(input1)) {
+	/**
+	 * Checks if a String is a file path, whether the specifies file exists, or a sentence.
+	 * If it is a valid path or a sentence, breaks it up into words with the method @link {
+	 * mgmt.FileManagement#fileParser(Path) fileParser}.
+	 *
+	 * <p>If the string is a valid file path, the file is broken into a LinkedHashMap of individual words and
+	 * their index. If the string is a sentence, that input is written temporarily in a temporary file
+	 * and then split into words.
+	 * <p>If the input is an invalid file path, a @link {java.io.FileNotFoundException#FileNotFoundException(String)
+	 * FileNotFoundException} is thrown,
+	 * and the user is prompted to submit a valid path again.
+	 *
+	 * @param input1 User input. Can be a file path or a sentence.
+	 * @return A LinkedHashMap containing a String of the position of each word as its keys and the words themselves as values.
+	 * @throws FileNotFoundException Exception thrown in case the file is not found.
+	 */
+	public static LinkedHashMap<String, String> reader(String input1) throws FileNotFoundException {
+		if (FileManagement.isFilePath(input1)) {
+			if (!FileManagement.fileExists(input1)) {
 				throw new FileNotFoundException("Please submit a valid path.");
 			}
 			Path file = Paths.get(input1);
-			return fileParser(file);
+			return FileManagement.fileParser(file);
 		} else {
 			Path file = null;
 			try {
 				File temp = File.createTempFile("config/temp-input", ".txt");
-				OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(temp), StandardCharsets.UTF_8);
+				OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(temp),
+						StandardCharsets.UTF_8);
 
 				out.write(input1);
 				out.close();
 				file = Paths.get(temp.getAbsolutePath());
 			} catch (IOException e) {
-				System.err.format("IOException: %s%n", e);
+				System.out.println("IOException: " + e.getMessage());
 			}
-			return fileParser(file);
+			return FileManagement.fileParser(file);
 		}
-	}
-	public static boolean fileExists(String str) {
-		File f = null;
-		boolean checker = false;
-		try{
-			f = new File(str);
-			checker = f.exists();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return checker;
-	}
-	public static boolean isFilePath(String str) {
-		Matcher pathMatcher = FILE_PATH.matcher(str);
-		if (pathMatcher.matches()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	public static LinkedList<String> fileParser(Path file) {
-		boolean success = true;
-		String[] wordArray = new String[100];
-		LinkedList<String> wordList = new LinkedList<String>();
-		try {
-			BufferedReader reader = Files.newBufferedReader(file , StandardCharsets.UTF_8);
-			String sCurrentLine = null;
-			while ((sCurrentLine =reader.readLine()) != null) {
-				Matcher unwantedMatcher = UNWANTED_SYMBOLS.matcher(sCurrentLine);
-				sCurrentLine = unwantedMatcher.replaceAll("");
-				wordArray = sCurrentLine.split(" ");
-				for (int i = 0; i < wordArray.length; i++) {
-					wordList.add(wordArray[i]);
-				}
-			}
-			for (int z = 0; z < wordList.size(); z++) {
-				System.out.println(wordList.get(z));
-				}
-			System.out.println(wordList.size());
-		} catch (IOException e) {
-			System.err.format("IOException: %s%n", e);
-			success = false;
-		} finally {
-			if (!success) {
-				System.out.println("Your input was not initialized.");
-			} else {
-				System.out.println("Your input was initialized.");
-			}
-		}
-		return wordList;
 	}
 }
