@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.HashSet;
 /**
  * Checks a collection of words for errors from a dictionary -  a collection of most of the words of the respective language.
- * 
+ *
  * @author SpaGeorgios
  * @author dionisispap98
  * @version 0.3-SNAPSHOT
@@ -13,7 +13,7 @@ import java.util.HashSet;
 public class Checker {
 	/**
 	 * Checks if the String is contained within a language's or user's dictionary, for every string of the user input.
-	 * 
+	 *
 	 * @param input1 A LinkedHashMap containing a string of the position of each word as its keys and the words to be checked themselves as values.
 	 * @param dictionary A HashSet which contains every word from the dictionary.
 	 * @return A LinkedHashMap containing a string of the position of each wrong word as its keys and the words themselves as values.
